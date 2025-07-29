@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API REST - Blog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            color: #666;
+            margin-top: 30px;
+        }
+        
+        h3 {
+            color: #888;
+        }
+        
+        .endpoint {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .method {
+            font-weight: bold;
+            color: #2196F3;
+        }
+        
+        .url {
+            font-family: monospace;
+            background: #f0f0f0;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        
+        .code {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            overflow-x: auto;
+        }
+        
+        ul {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        
+        li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>�� API REST - Blog</h1>
+    <p>Documentatie van alle beschikbare endpoints in deze API.</p>
+    
+    <h2>�� Basis URL</h2>
+    <p><strong>http://localhost:3000</strong></p>
+    
+    <h2>👥 Gebruikers Endpoints</h2>
+    
+    <div class="endpoint">
+        <div class="method">GET</div>
+        <div class="url">/api/users</div>
+        <p>Alle gebruikers ophalen met paginering en zoeken</p>
+        <div class="code">
+            <strong>Query parameters:</strong>
+            • page - Paginanummer (standaard: 1)
+            • limit - Items per pagina (standaard: 10)
+            • search - Zoekterm in naam en email
+        </div>
+    </div>
+    
+    <div class="endpoint">
+        <div class="method">GET</div>
+        <div class="url">/api/users/:id</div>
+        <p>Specifieke gebruiker ophalen op ID</p>
+    </div>
+    
+    <div class="endpoint">
+        <div class="method">POST</div>
+        <div class="url">/api/users</div>
+        <p>Nieuwe gebruiker aanmaken</p>
+        <div class="code">
+{
+  "name": "Jan Jansen",
+  "email": "jan@voorbeeld.com",
+  "age": 25,
+  "bio": "Webontwikkelaar"
+}
+        </div>
+    </div>
+    
+    <div class="endpoint">
+        <div class="method">PUT</div>
+        <div class="url">/api/users/:id</div>
+        <p>Bestaande gebruiker bijwerken</p>
+    </div>
+    
+    <div class="endpoint">
+        <div class="method">DELETE</div>
+        <div class="url">/api/users/:id</div>
+        <p>Gebruiker verwijderen</p>
+    </div>
+    
+    <h2>�� Posts Endpoints</h2>
+    
+    <div class="endpoint">
+        <div class="method">GET</div>
+        <div class="url">/api/posts</div>
+        <p>Alle posts ophalen met filters en paginering</p>
+        <div class="code">
+            <strong>Query parameters:</strong>
+            • page - Paginanummer (standaard: 1)
+            • limit - Items per pagina (standaard: 10)
+            • search - Zoeken in titel en inhoud
+            • category - Filteren op categorie
+            • author - Filteren op auteur ID
+        </div>
+    </div>
+    
+    <div class="endpoint">
+        <div class="method">GET</div>
+        <div class="url">/api/posts/:id</div>
+        <p>Specifieke post ophalen op ID</p>
+    </div>
+    
+    <div class="endpoint">
+        <div class="method">POST</div>
+        <div class="url">/api/posts</div>
+        <p>Nieuwe post aanmaken</p>
+        <div class="code">
+{
+  "title": "Mijn eerste post",
+  "content": "Inhoud van mijn eerste post...",
+  "author": "ID_VAN_GEBRUIKER",
+  "category": "deportes",
+  "tags": ["nodejs", "express"]
+}
+        </div>
+    </div>
+    
+    <div class="endpoint">
+        <div class="method">PUT</div>
+        <div class="url">/api/posts/:id</div>
+        <p>Bestaande post bijwerken</p>
+    </div>
+    
+    <div class="endpoint">
+        <div class="method">DELETE</div>
+        <div class="url">/api/posts/:id</div>
+        <p>Post verwijderen</p>
+    </div>
+    
+    <div class="endpoint">
+        <div class="method">GET</div>
+        <div class="url">/api/posts/author/:authorId</div>
+        <p>Alle posts van een specifieke auteur ophalen</p>
+    </div>
+    
+    <h2>�� Post Categorieën</h2>
+    <ul>
+        <li><strong>sport</strong> - Posts over sport</li>
+        <li><strong>andere</strong> - Posts over andere onderwerpen</li>
+        <li><strong>entretaiment</strong> - Posts over entertainment</li>
+    </ul>
+    
+    <h2>🔍 Voorbeelden van gebruik</h2>
+    
+    <h3>Gebruiker aanmaken:</h3>
+    <div class="code">
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "name": "Anna Jansen",
+  "email": "anna@voorbeeld.com",
+  "age": 28,
+  "bio": "Full Stack Ontwikkelaar"
+}
+    </div>
+    
+    <h3>Gebruikers zoeken:</h3>
+    <div class="code">
+GET http://localhost:3000/api/users?search=anna&page=1&limit=5
+    </div>
+    
+    <h3>Post aanmaken:</h3>
+    <div class="code">
+POST http://localhost:3000/api/posts
+Content-Type: application/json
+
+{
+  "title": "Introductie tot Node.js",
+  "content": "Node.js is een JavaScript runtime...",
+  "author": "ID_VAN_GEMAAKTE_GEBRUIKER",
+  "category": "deportes",
+  "tags": ["nodejs", "javascript"]
+}
+    </div>
+    
+    <h3>Posts zoeken:</h3>
+    <div class="code">
+GET http://localhost:3000/api/posts?search=nodejs&category=deportes&page=1&limit=5
+    </div>
+    
+    <h2>✅ Validaties</h2>
+    <ul>
+        <li>Verplichte velden mogen niet leeg zijn</li>
+        <li>Leeftijd moet een nummer zijn tussen 13 en 120</li>
+        <li>Email moet geldig formaat hebben</li>
+        <li>Naam mag geen cijfers bevatten</li>
+        <li>Categorieën moeten geldig zijn</li>
+    </ul>
+    
+    <footer style="margin-top: 50px; text-align: center; color: #666;">
+        <p>API ontwikkeld met Node.js, Express en MongoDB</p>
+    </footer>
+</body>
+</html>

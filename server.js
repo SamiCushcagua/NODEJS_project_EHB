@@ -22,10 +22,10 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Conectar a MongoDB
+// Connect met mongooDB
 connectDB();
 
-// Middleware básico
+// Middleware 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -40,15 +40,15 @@ app.use(express.static('public'));
 app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
 
-// Ruta raíz - Documentación
+// Root Index info
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Middleware de manejo de errores (DEBE ir al final)
+// Middleware errorhandeling
 app.use(errorHandler);
 
-// Iniciar servidor
+// start server
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });

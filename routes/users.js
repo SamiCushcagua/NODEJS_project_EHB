@@ -4,7 +4,7 @@ import { validateUser } from '../middleware/validation.js';
 
 const router = express.Router();
 
-// GET /api/users - Obtener todos los usuarios
+// GET /api/users - alle users
 router.get('/', async(req, res, next) => {
     try {
         const { page = 1, limit = 10, search = '' } = req.query;
@@ -35,11 +35,11 @@ router.get('/', async(req, res, next) => {
             }
         });
     } catch (error) {
-        next(error); // Pasar el error al middleware de manejo de errores
+        next(error); 
     }
 });
 
-// GET /api/users/:id - Obtener usuario por ID
+// GET /api/users/:id - user by ID
 router.get('/:id', async(req, res, next) => {
     try {
         const user = await User.findById(req.params.id);
@@ -50,7 +50,7 @@ router.get('/:id', async(req, res, next) => {
     }
 });
 
-// POST /api/users - Crear usuario (CON VALIDACIÓN)
+// POST /api/users - user aanmaken
 router.post('/', validateUser, async(req, res, next) => {
     try {
         const user = new User(req.body);
@@ -61,7 +61,7 @@ router.post('/', validateUser, async(req, res, next) => {
     }
 });
 
-// PUT /api/users/:id - Actualizar usuario (CON VALIDACIÓN)
+// PUT /api/users/:id - update user
 router.put('/:id', validateUser, async(req, res, next) => {
     try {
         const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -72,7 +72,7 @@ router.put('/:id', validateUser, async(req, res, next) => {
     }
 });
 
-// DELETE /api/users/:id - Eliminar usuario
+// DELETE /api/users/:id - verwijder USER
 router.delete('/:id', async(req, res, next) => {
     try {
         const user = await User.findByIdAndDelete(req.params.id);

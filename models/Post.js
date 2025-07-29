@@ -3,26 +3,26 @@ import mongoose from 'mongoose';
 const postSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: [true, 'El título es obligatorio'],
+        required: [true, 'Moet een titel hebben'],
         trim: true,
-        minlength: [5, 'El título debe tener al menos 5 caracteres'],
-        maxlength: [100, 'El título no puede exceder 100 caracteres']
+        minlength: [5, 'minstens 5 letters'],
+        maxlength: [100, 'max 100 letters']
     },
     content: {
         type: String,
-        required: [true, 'El contenido es obligatorio'],
-        minlength: [10, 'El contenido debe tener al menos 10 caracteres'],
-        maxlength: [5000, 'El contenido no puede exceder 5000 caracteres']
+        required: [true, 'Content verplicht'],
+        minlength: [10, 'Min 10 characters'],
+        maxlength: [5000, 'max 5000 characters']
     },
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: [true, 'El autor es obligatorio']
+        required: [true, 'verplicht auteur']
     },
     category: {
         type: String,
-        required: [true, 'La categoría es obligatoria'],
-        enum: ['tecnología', 'deportes', 'política', 'entretenimiento', 'otros']
+        required: [true, 'Category verplicht'],
+        enum: ['tech', 'sport', 'politics', 'entretaiment', 'andere']
     },
     tags: [{
         type: String,
@@ -36,7 +36,7 @@ const postSchema = new mongoose.Schema({
     timestamps: true
 });
 
-// Índice para búsquedas eficientes
+// Íbeter zoeken
 postSchema.index({ title: 'text', content: 'text' });
 
 const Post = mongoose.model('Post', postSchema);
