@@ -6,7 +6,7 @@ const errorHandler = (err, req, res, next) => {
 
     if (err.name === 'ValidationError') {
 
-        const errors = Object.values(err.errors).map(error => error.massage);
+        const errors = Object.values(err.errors).map(error => error.message);
         return res.status(400).json({
 
             error: 'Validation error',
@@ -16,7 +16,7 @@ const errorHandler = (err, req, res, next) => {
 
     }
 
-    if (erro.code === 11000) {
+    if (err.code === 11000) {
         return res.status(400).json({
             error: 'already existing mail'
 

@@ -78,7 +78,7 @@ router.get('/:id', async (req, res) => {
             .populate('author', 'name email');
         
         if (!post) {
-            return res.status(404).json({ error: 'Post no encontrado' });
+            return res.status(404).json({ error: 'Post niet gevonden' });
         }
         
         res.json(post);
@@ -132,7 +132,7 @@ router.put('/:id', async (req, res) => {
         ).populate('author', 'name email'); 
         
         if (!post) {
-            return res.status(404).json({ error: 'Post no encontrado' });
+            return res.status(404).json({ error: 'Post niet gevonden   ' });
         }
         
         res.json(post);
@@ -149,10 +149,10 @@ router.delete('/:id', async (req, res) => {
         const post = await Post.findByIdAndDelete(req.params.id);
         
         if (!post) {
-            return res.status(404).json({ error: 'Post no encontrado' });
+            return res.status(404).json({ error: 'Post niet gevonden' });
         }
         
-        res.json({ message: 'Post eliminado correctamente' });
+            res.json({ message: 'Post verwijderd' });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

@@ -43,12 +43,13 @@ router.get('/', async(req, res, next) => {
 router.get('/:id', async(req, res, next) => {
     try {
         const user = await User.findById(req.params.id);
-        if(!user) return res.status(404).json({ error: 'Usuario no encontrado' });
+        if(!user) return res.status(404).json({ error: 'User niet gevonden' });
         res.json(user);
     } catch (error) {
         next(error);
     }
 });
+
 
 // POST /api/users - user aanmaken
 router.post('/', validateUser, async(req, res, next) => {
@@ -65,7 +66,7 @@ router.post('/', validateUser, async(req, res, next) => {
 router.put('/:id', validateUser, async(req, res, next) => {
     try {
         const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if(!user) return res.status(404).json({ error: 'Usuario no encontrado' });
+        if(!user) return res.status(404).json({ error: 'User niet gevonden' });
         res.json(user);
     } catch (error) {
         next(error);
@@ -76,8 +77,8 @@ router.put('/:id', validateUser, async(req, res, next) => {
 router.delete('/:id', async(req, res, next) => {
     try {
         const user = await User.findByIdAndDelete(req.params.id);
-        if(!user) return res.status(404).json({ error: 'Usuario no encontrado' });
-        res.json({ message: 'Usuario eliminado correctamente' });
+        if(!user) return res.status(404).json({ error: 'User niet gevonden' });
+        res.json({ message: 'User verwijderd' });
     } catch (error) {
         next(error);
     }

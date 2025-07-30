@@ -11,42 +11,48 @@
             margin: 0 auto;
             padding: 20px;
             line-height: 1.6;
-            background-color: #f5f5f5;
+            background-color: white;
         }
         
         h1 {
             color: #333;
             text-align: center;
-            border-bottom: 2px solid #333;
+            border-bottom: 1px solid #ccc;
             padding-bottom: 10px;
         }
         
         h2 {
-            color: #666;
+            color: #333;
             margin-top: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
         }
         
         h3 {
-            color: #888;
+            color: #555;
+            margin-top: 20px;
         }
         
         .endpoint {
-            background: white;
             border: 1px solid #ddd;
             padding: 15px;
             margin: 10px 0;
-            border-radius: 5px;
+            border-radius: 3px;
         }
         
         .method {
             font-weight: bold;
-            color: #2196F3;
+            color: #333;
+            background: #f0f0f0;
+            padding: 3px 8px;
+            border-radius: 3px;
+            margin-right: 10px;
         }
         
         .url {
             font-family: monospace;
-            background: #f0f0f0;
-            padding: 5px;
+            background: #f9f9f9;
+            padding: 3px 6px;
             border-radius: 3px;
         }
         
@@ -54,31 +60,134 @@
             background: #f8f9fa;
             border: 1px solid #e9ecef;
             padding: 10px;
-            border-radius: 5px;
+            border-radius: 3px;
             font-family: monospace;
             overflow-x: auto;
+            margin: 10px 0;
+        }
+        
+        .powershell {
+            background: #f5f5f5;
+            color: #333;
+            border-left: 3px solid #666;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 10px;
+            border-radius: 3px;
+            margin: 10px 0;
         }
         
         ul {
-            background: white;
-            padding: 15px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 3px;
         }
         
         li {
             margin: 5px 0;
         }
+        
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
     </style>
 </head>
 <body>
-    <h1>�� API REST - Blog</h1>
+    <h1>API REST - Blog</h1>
     <p>Documentatie van alle beschikbare endpoints in deze API.</p>
     
-    <h2>�� Basis URL</h2>
+    <div class="warning">
+        <strong>⚠️ Belangrijk:</strong> Zorg ervoor dat je server draait op <code>http://localhost:3000</code> voordat je deze commando's gebruikt.
+    </div>
+    
+    <h2>Basis URL</h2>
     <p><strong>http://localhost:3000</strong></p>
     
-    <h2>👥 Gebruikers Endpoints</h2>
+    <h2>PowerShell Voorbeelden</h2>
+    <p>Kopieer deze commando's in PowerShell om de API te testen:</p>
+    
+    <h3>Gebruiker aanmaken:</h3>
+    <div class="code powershell">
+Invoke-RestMethod -Uri "http://localhost:3000/api/users" -Method POST -ContentType "application/json" -Body '{
+    "name": "Jan Jansen",
+    "email": "jan@voorbeeld.com",
+    "age": 25,
+    "bio": "Webontwikkelaar"
+}'
+    </div>
+    
+    <h3>Alle gebruikers ophalen:</h3>
+    <div class="code powershell">
+Invoke-RestMethod -Uri "http://localhost:3000/api/users" -Method GET
+    </div>
+    
+    <h3>Gebruiker zoeken:</h3>
+    <div class="code powershell">
+Invoke-RestMethod -Uri "http://localhost:3000/api/users?search=jan" -Method GET
+    </div>
+    
+    <h3>Gebruiker bijwerken:</h3>
+    <div class="code powershell">
+        Invoke-RestMethod -Uri "http://localhost:3000/api/users/688a95408535b676463ffb2f" -Method PUT -ContentType "application/json" -Body '{ "name": "Jan Jansen Jr.",
+        "email": "jan@voorbeeld.com", 
+        "age": 25, 
+        "bio": "Senior Webontwikkelaar" }'
+    </div>
+    
+    <h3>Gebruiker verwijderen:</h3>
+    <div class="code powershell">
+Invoke-RestMethod -Uri "http://localhost:3000/api/users/ID_VAN_GEBRUIKER" -Method DELETE
+    </div>
+    
+    <h3>Post aanmaken:</h3>
+    <div class="code powershell">
+Invoke-RestMethod -Uri "http://localhost:3000/api/posts" -Method POST -ContentType "application/json" -Body '{
+    "title": "Mijn eerste post",
+    "content": "Inhoud van mijn eerste post...",
+    "author": "ID_VAN_GEBRUIKER",
+    "category": "deportes",
+    "tags": ["nodejs", "express"]
+}'
+    </div>
+    
+    <h3>Alle posts ophalen:</h3>
+    <div class="code powershell">
+Invoke-RestMethod -Uri "http://localhost:3000/api/posts" -Method GET
+    </div>
+    
+    <h3>Posts zoeken:</h3>
+    <div class="code powershell">
+Invoke-RestMethod -Uri "http://localhost:3000/api/posts?search=nodejs&category=deportes" -Method GET
+    </div>
+    
+    <h3>Posts van specifieke auteur:</h3>
+    <div class="code powershell">
+Invoke-RestMethod -Uri "http://localhost:3000/api/posts/author/ID_VAN_AUTEUR" -Method GET
+    </div>
+    
+    <h3>Stap-voor-stap voorbeeld:</h3>
+    <div class="code">
+1. Maak eerst een gebruiker aan:
+Invoke-RestMethod -Uri "http://localhost:3000/api/users" -Method POST -ContentType "application/json" -Body '{"name":"Anna","email":"anna@email.com","age":25}'
+
+2. Kopieer de ID uit de response (bijv. "68876bfaf0ad7a7e434a577c")
+
+3. Maak een post aan met die ID:
+Invoke-RestMethod -Uri "http://localhost:3000/api/posts" -Method POST -ContentType "application/json" -Body '{"title":"Mijn post","content":"Inhoud","author":"68876bfaf0ad7a7e434a577c","category":"deportes"}'
+
+4. Bekijk alle posts:
+Invoke-RestMethod -Uri "http://localhost:3000/api/posts" -Method GET
+    </div>
+    
+    <h2>Gebruikers Endpoints</h2>
     
     <div class="endpoint">
         <div class="method">GET</div>
@@ -124,7 +233,7 @@
         <p>Gebruiker verwijderen</p>
     </div>
     
-    <h2>�� Posts Endpoints</h2>
+    <h2>Posts Endpoints</h2>
     
     <div class="endpoint">
         <div class="method">GET</div>
@@ -179,53 +288,16 @@
         <p>Alle posts van een specifieke auteur ophalen</p>
     </div>
     
-    <h2>�� Post Categorieën</h2>
+    <h2>Post Categorieën</h2>
     <ul>
-        <li><strong>sport</strong> - Posts over sport</li>
-        <li><strong>andere</strong> - Posts over andere onderwerpen</li>
-        <li><strong>entretaiment</strong> - Posts over entertainment</li>
+        <li><strong>sports</strong> - Posts over sport</li>
+        <li><strong>other</strong> - Posts over andere onderwerpen</li>
+        <li><strong>entertainment</strong> - Posts over entertainment</li>
+        <li><strong>technology</strong> - Posts over technologie</li>
+        <li><strong>politics</strong> - Posts over politiek</li>
     </ul>
     
-    <h2>🔍 Voorbeelden van gebruik</h2>
-    
-    <h3>Gebruiker aanmaken:</h3>
-    <div class="code">
-POST http://localhost:3000/api/users
-Content-Type: application/json
-
-{
-  "name": "Anna Jansen",
-  "email": "anna@voorbeeld.com",
-  "age": 28,
-  "bio": "Full Stack Ontwikkelaar"
-}
-    </div>
-    
-    <h3>Gebruikers zoeken:</h3>
-    <div class="code">
-GET http://localhost:3000/api/users?search=anna&page=1&limit=5
-    </div>
-    
-    <h3>Post aanmaken:</h3>
-    <div class="code">
-POST http://localhost:3000/api/posts
-Content-Type: application/json
-
-{
-  "title": "Introductie tot Node.js",
-  "content": "Node.js is een JavaScript runtime...",
-  "author": "ID_VAN_GEMAAKTE_GEBRUIKER",
-  "category": "deportes",
-  "tags": ["nodejs", "javascript"]
-}
-    </div>
-    
-    <h3>Posts zoeken:</h3>
-    <div class="code">
-GET http://localhost:3000/api/posts?search=nodejs&category=deportes&page=1&limit=5
-    </div>
-    
-    <h2>✅ Validaties</h2>
+    <h2>Validaties</h2>
     <ul>
         <li>Verplichte velden mogen niet leeg zijn</li>
         <li>Leeftijd moet een nummer zijn tussen 13 en 120</li>
@@ -234,8 +306,17 @@ GET http://localhost:3000/api/posts?search=nodejs&category=deportes&page=1&limit
         <li>Categorieën moeten geldig zijn</li>
     </ul>
     
-    <footer style="margin-top: 50px; text-align: center; color: #666;">
+    <h2>PowerShell Parameters</h2>
+    <div class="code">
+<strong>-Uri:</strong> De URL van de API endpoint
+<strong>-Method:</strong> HTTP methode (GET, POST, PUT, DELETE)
+<strong>-ContentType:</strong> Type data (alleen nodig voor POST/PUT)
+<strong>-Body:</strong> JSON data (alleen nodig voor POST/PUT)
+    </div>
+    
+    <footer>
         <p>API ontwikkeld met Node.js, Express en MongoDB</p>
+        <p>Tip: Gebruik PowerShell om de API te testen!</p>
     </footer>
 </body>
 </html>
