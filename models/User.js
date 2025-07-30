@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, 'Naam verplicht'],
-        trim: true,
+        trim: true, //verwijdert spaties aan het begin en einde van de string
         minlength: [2, 'min 2 characters'],
         maxlength: [50, 'max 50 characters']
     },
@@ -27,13 +27,13 @@ const userSchema = new mongoose.Schema({
         maxlength: [500, 'Biografie max 500 characters']
     }
 }, {
-    timestamps: true
+    timestamps: true //maakt een createdAt en updatedAt veld aan
 });
 
-// Middleware pre-save para validar que el nombre no contenga números
+// middleware voor de save functie
 userSchema.pre('save', function(next) {
     if (this.name && /\d/.test(this.name)) {
-        return next(new Error('Naam geen letters'));
+        return next(new Error('Naam mag geen cijfers bevatten'));
     }
     next();
 });

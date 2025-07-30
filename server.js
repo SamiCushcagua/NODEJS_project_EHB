@@ -1,18 +1,18 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import path from 'path';
+import cors from 'cors'; //laat toe om de api te gebruiken voor andere domeinen
+import bodyParser from 'body-parser'; //laat toe om de body van de request te lezen json
+import path from 'path'; //laat toe om de static files te serveren
 import { fileURLToPath } from 'url';
 
-// Importar configuración de base de datos
+// Importeer de database configuratie
 import connectDB from './config/database.js';
 
-// Importar middlewares
+// Importeer de middlewares
 import errorHandler from './middleware/errorHandler.js';
 import logger from './middleware/logger.js';
 
-// Importar rutas
+        // Importeer de routes
 import userRoutes from './routes/users.js';
 import postRoutes from './routes/posts.js';
 

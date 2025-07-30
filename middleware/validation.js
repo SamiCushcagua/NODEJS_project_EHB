@@ -49,7 +49,7 @@ const validatePost = (req, res, next) => {
  
     if (!title || !content || !author || !category) {
         return res.status(400).json({
-            error: 'Todos los campos obligatorios deben estar presentes',
+            error: 'alle velden moeten ingevuld worden',
             required: ['title', 'content', 'author', 'category']
         });
     }
@@ -57,18 +57,18 @@ const validatePost = (req, res, next) => {
    //titel lengte
     if (title.length < 5 || title.length > 100) {
         return res.status(400).json({
-            error: 'El título debe tener entre 5 y 100 caracteres'
+            error: 'titel moet tussen 5 en 100 karakters blijven'
         });
     }
     
     // content lengte
     if (content.length < 10 || content.length > 5000) {
         return res.status(400).json({
-            error: 'El contenido debe tener entre 10 y 5000 caracteres'
+            error: 'content moet tussen 10 en 5000 karakters blijven'
         });
     }
     
-    // 4. categories
+    // 4. categories valideren
     const validCategories = ['tech', 'sport', 'politics', 'entretaiment', 'andere'];
     if (!validCategories.includes(category)) {
         return res.status(400).json({

@@ -15,8 +15,8 @@ const postSchema = new mongoose.Schema({
         maxlength: [5000, 'max 5000 characters']
     },
     author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        type: mongoose.Schema.Types.ObjectId, //ID van de gebruiker
+        ref: 'User', //referentie naar de User model
         required: [true, 'verplicht auteur']
     },
     category: {
@@ -36,7 +36,7 @@ const postSchema = new mongoose.Schema({
     timestamps: true
 });
 
-// Íbeter zoeken
+// zoeken met index
 postSchema.index({ title: 'text', content: 'text' });
 
 const Post = mongoose.model('Post', postSchema);
